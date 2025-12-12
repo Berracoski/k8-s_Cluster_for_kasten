@@ -16,7 +16,7 @@ resource "aws_eks_addon" "this" {
 
 }
 
-resource "kubernetes_storage_class" "ebs_csi" {
+resource "kubernetes_storage_class_v1" "ebs_csi" {
   provider = kubernetes.eks
   metadata {
     name = "ebs-csi-sc"
