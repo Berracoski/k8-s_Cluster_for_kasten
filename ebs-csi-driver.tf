@@ -32,4 +32,8 @@ resource "kubernetes_storage_class_v1" "ebs_csi" {
     type      = "gp3"
     encrypted = "true"
   }
+  
+  depends_on = [
+    aws_eks_node_group.default
+  ]
 }

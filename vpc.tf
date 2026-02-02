@@ -27,7 +27,9 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
   availability_zone       = data.aws_availability_zones.available.names[count.index]
   tags = {
-    Name = "public-subnet-${count.index + 1}"
+    Name                         = "public-subnet-${count.index + 1}"
+    "kubernetes.io/role/elb"     = "1"        # Required for Internet-facing ALBs
+    "kubernetes.io/cluster/main" = "shared"   # Replace 'main' with your actual EKS cluster name
   }
 }
 

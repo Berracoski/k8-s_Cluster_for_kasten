@@ -3,7 +3,7 @@ resource "kubernetes_namespace_v1" "kasten_io" {
   metadata {
     name = "kasten-io"
   }
-  depends_on = [aws_eks_cluster.main]
+  depends_on = [aws_eks_node_group.default]
 }
 
 resource "kubernetes_service_account_v1" "kasten_sa" {

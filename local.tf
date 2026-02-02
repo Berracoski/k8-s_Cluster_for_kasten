@@ -1,3 +1,3 @@
 locals {
-  k8s_version = "1.32"
+  k8s_version = "1.34"
 }

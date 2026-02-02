@@ -1,12 +1,14 @@
 ## Repo and install
 resource "helm_release" "aws_load_balancer_controller" {
-  provider       = helm.eks
-  name           = "aws-load-balancer-controller"
-  repository     = "https://aws.github.io/eks-charts"
-  chart          = "aws-load-balancer-controller"
-  namespace      = "kube-system"
-  create_namespace = true
+  provider         = helm.eks
+  name             = "aws-load-balancer-controller"
+  repository       = "https://aws.github.io/eks-charts"
+  chart            = "aws-load-balancer-controller"
+  namespace        = "kube-system"
+  cleanup_on_fail  = true
+  wait             = false # This prevents the "deadline exceeded" by not waiting for pods to be ready
 
+  # Use the = sign to make it an argument, not a block
   set = [
     {
       name  = "clusterName"
@@ -14,7 +16,7 @@ resource "helm_release" "aws_load_balancer_controller" {
     },
     {
       name  = "serviceAccount.create"
-      value = "false"
+      value = "true"
     },
     {
       name  = "serviceAccount.name"
